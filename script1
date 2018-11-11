@@ -23,6 +23,6 @@ for ((var = 1 ; var <= $count; var++)); do
 		mkdir $direct/$name$var/$subname$dar
 		for ((lar = 1; lar<=20; lar++)); do
 			touch $direct/$name$var/$subname$dar/$fname$lar
-done
-done
+		done
+	done
 done
