@@ -1,0 +1,28 @@
+#!/bin/bash
+direct=''
+name=''
+subname=''
+count=''
+fname=''
+echo -n "Введите место расположения папок"
+read direct
+echo -n "Введитe название папок"
+read name
+echo -n "Введитe количество папок"
+read count
+echo -n "Введитe название подпапок"
+read subname
+echo -n "Введитe азвание файлов"
+read fname
+
+
+
+for ((var = 1 ; var <= $count; var++)); do
+	mkdir $direct/$name$var
+	for ((dar = 1; dar <= 10; dar++)); do
+		mkdir $direct/$name$var/$subname$dar
+		for ((lar = 1; lar<=20; lar++)); do
+			touch $direct/$name$var/$subname$dar/$fname$lar
+done
+done
+done
