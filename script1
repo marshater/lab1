@@ -4,25 +4,48 @@ name=''
 subname=''
 count=''
 fname=''
+min=0
+max=150
 echo -n "Введите место расположения папок"
 read direct
+	if [ -z "$direct" ] ; then
+		echo input error
+	exit
+	fi
 echo -n "Введитe название папок"
 read name
+	if [ -z "$name" ] ; then
+		echo input error
+	exit
+	fi
 echo -n "Введитe количество папок"
 read count
+	if [ -z "$count" ] ; then
+		echo input error
+	exit
+	fi
+	if [[ $count -le min || $count -ge max ]] ; then
+		echo input error
+		exit
+	fi
 echo -n "Введитe название подпапок"
 read subname
-echo -n "Введитe азвание файлов"
+	if [ -z "$subname" ] ; then
+		echo input error
+	exit
+	fi
+echo -n "Введитe название файлов"
 read fname
-
-
-
-for ((var = 1 ; var <= $count; var++)); do
+	if [ -z "$fname" ] ; then
+		echo input error
+	exit
+	fi
+for ((i = 1 ; i <= $count; i++)); do
 	mkdir $direct/$name$var
-	for ((dar = 1; dar <= 10; dar++)); do
+	for ((j= 1; j <= 10; j++)); do
 		mkdir $direct/$name$var/$subname$dar
-		for ((lar = 1; lar<=20; lar++)); do
-			touch $direct/$name$var/$subname$dar/$fname$lar
+		for ((k = 1; k<=20; k++)); do
+			touch $direct/$name$i/$subname$j/$fname$k
 		done
 	done
 done
