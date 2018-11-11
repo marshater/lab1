@@ -4,8 +4,6 @@ name=''
 subname=''
 count=''
 fname=''
-min=0
-max=150
 echo -n "Введите место расположения папок"
 read direct
 	if [ -z "$direct" ] ; then
@@ -24,7 +22,7 @@ read count
 		echo input error
 	exit
 	fi
-	if [[ $count -le min || $count -ge max ]] ; then
+	if [[ $count -le 0 || $count -ge 150 ]] ; then
 		echo input error
 		exit
 	fi
@@ -41,9 +39,9 @@ read fname
 	exit
 	fi
 for ((i = 1 ; i <= $count; i++)); do
-	mkdir $direct/$name$var
+	mkdir $direct/$name$i
 	for ((j= 1; j <= 10; j++)); do
-		mkdir $direct/$name$var/$subname$dar
+		mkdir $direct/$name$i/$subname$j
 		for ((k = 1; k<=20; k++)); do
 			touch $direct/$name$i/$subname$j/$fname$k
 		done
