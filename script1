@@ -10,11 +10,16 @@ read direct
 		echo input error
 	exit
 	fi
+
 echo -n "Введитe название папок"
 read name
 	if [ -z "$name" ] ; then
 		echo input error
 	exit
+	fi
+	if [[ "$name" == */* ]] ; then
+		echo input error
+		exit
 	fi
 echo -n "Введитe количество папок"
 read count
@@ -32,11 +37,19 @@ read subname
 		echo input error
 	exit
 	fi
+	if [[ "$subname" == */* ]] ; then
+		echo input error
+		exit
+	fi
 echo -n "Введитe название файлов"
 read fname
 	if [ -z "$fname" ] ; then
 		echo input error
 	exit
+	fi
+	if [[ "$fname" == */* ]] ; then
+		echo input error
+		exit
 	fi
 for ((i = 1 ; i <= $count; i++)); do
 	mkdir $direct/$name$i
