@@ -1,0 +1,10 @@
+#!/bin/bash
+time=''
+H=''
+M=''
+echo Введите время в формате HH MM
+read H M
+echo $H $M 
+sed -i -u 'i\'$M' '$H' * * *  /home/jackson/alarms/alarm.sh' cronch.d
+crontab /home/jackson/Загрузки/labc/labc2/cronch.d
+
