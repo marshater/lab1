@@ -2,9 +2,66 @@
 time=''
 H=''
 M=''
+N=''
+c=''
+countofstr=''
+echo Ваши действия
+echo 1. создание
+echo 2. редактирование
+echo 3. удаление
+echo 4. список будильников
+read N
+if ((N<=0)) || ((N>4)); then
+echo input error
+exit
+fi
+if ((N==1)); then
 echo Введите время в формате HH MM
 read H M
 echo $H $M 
-sed -i -u 'i\'$M' '$H' * * *  /home/jackson/alarms/alarm.sh' cronch.d
-crontab /home/jackson/Загрузки/labc/labc2/cronch.d
-
+echo ''$M' '$H' * * * /home/jackson/alarms/alarm.sh' >>cronch
+fi
+if ((N==2)); then
+echo Введите время редактируемого будильника
+sed -i 's/\([0-9]*\) \([0-9]*\)/\2 \1/' cronch
+sed = cronch | sed 'N; s/^/ /; s/ *\(.\{6,\}\)\n/\1 /'
+c="$(cut cronch -c 1-5)"
+echo "$c"
+count=$(echo "$c" | wc -l)
+echo $count
+for ((i=1; i <= $count; i++))
+do
+sed -i ''$i's/^/'$i'-/' cronch
+done
+d="$(cut cronch -c 1-7)"
+echo "$d"
+echo Выберите редактируемый будильник
+read str
+echo введите время
+read H M
+sed -i ''$str's%.*%'$str'-'$M' '$H' * * * /home/jackson/alarms/alarm.sh%g' cronch
+sed -i 's/^..//' cronch
+sed -i 's/\([0-9]*\) \([0-9]*\)/\2 \1/' cronch
+fi
+if((N==3)); then
+sed -i 's/\([0-9]*\) \([0-9]*\)/\2 \1/' cronch
+sed = cronch | sed 'N; s/^/ /; s/ *\(.\{6,\}\)\n/\1 /'
+c="$(cut cronch -c 1-5)"
+echo "$c"
+count=$(echo "$c" | wc -l)
+echo $count
+for ((i=1; i <= $count; i++))
+do
+sed -i ''$i's/^/'$i'-/' cronch
+done
+d="$(cut cronch -c 1-7)"
+echo "$d"
+echo выберите ненужный будильник
+read str
+sed -i ''$str'd' cronch
+sed -i 's/^..//' cronch
+sed -i 's/\([0-9]*\) \([0-9]*\)/\2 \1/' cronch
+fi
+if ((N==4)); then
+cat cronch
+fi
